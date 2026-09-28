@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Toty ❤️</title>
+<style>
+:root{--bg1:#fff7fa;--bg2:#f8eaf1;--ink:#442433;--muted:#8b6a7a;--accent:#9b3a69;--accent2:#d36a9a;--line:#ead8e1;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at top right,#ffe5ef 0,transparent 28%),linear-gradient(180deg,var(--bg1),var(--bg2));min-height:100vh}.wrap{width:min(94vw,760px);margin:auto;padding:24px 14px 60px}.card{background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.9);border-radius:28px;padding:24px;box-shadow:0 18px 50px rgba(83,39,60,.10);margin-bottom:18px}.center{text-align:center}.eyebrow{font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:var(--accent);font-weight:800}.hero h1,.confession h2{font-family:Georgia,serif;color:#652448;margin:8px 0}.hero h1{font-size:clamp(36px,8vw,58px)}.lead{color:var(--muted);line-height:2;font-size:17px}.btn{border:0;border-radius:999px;padding:14px 22px;font-size:16px;font-weight:800;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 10px 22px rgba(155,58,105,.24)}.hidden{display:none!important}.quiz-title{font-size:22px;font-weight:900;margin:4px 0 8px}.progress{font-size:14px;color:var(--muted);margin-bottom:10px}.options{display:grid;gap:12px;margin-top:14px}.option{border:2px solid var(--line);background:#fff;border-radius:18px;padding:15px 16px;text-align:right;font-weight:700;cursor:pointer;transition:.15s}.option:hover{background:#fff8fb}.option.selected{border-color:#b95b87;background:#fff4f9}.feedback{min-height:24px;margin-top:12px;text-align:center;color:var(--muted);font-size:15px}.modal-bg{position:fixed;inset:0;background:rgba(52,22,37,.38);display:grid;place-items:center;padding:20px;z-index:20}.modal{width:min(92vw,360px);background:#fff;border-radius:24px;padding:22px;text-align:center;box-shadow:0 22px 60px rgba(51,19,35,.22)}.modal .emoji{font-size:46px}.modal h3{margin:6px 0 8px;font-size:25px}.modal p{color:var(--muted);font-size:17px;line-height:1.8}.confession{padding:30px 24px}.confession h2{font-size:clamp(34px,7vw,48px)}.poem{white-space:pre-line;line-height:2.15;font-size:20px;color:#5d3b4c;margin-top:18px}.final-heart{font-size:42px;margin-top:16px}.small{font-size:13px;color:var(--muted);margin-top:14px}.confetti{position:fixed;top:-30px;pointer-events:none;z-index:10;animation:fall linear forwards}@keyframes fall{to{transform:translateY(115vh) rotate(720deg);opacity:.85}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="card hero center" id="intro">
+    <div class="eyebrow">For Toty</div>
+    <h1>باقي يومين على ميلادك 🎂</h1>
+    <p class="lead">
+      وحبيت أكون أول المهنّين لك..<br>
+      ميلاد الهنا، والعمر المديد،<br>
+      عامك سعيد يا حبيبي،<br>
+      وكل عام وأنت أجمل أقداري. ❤️
+    </p>
+    <p class="lead">بس قبلها عندي لك شيء صغير، لازم تعدّيه أول 👀</p>
+    <button class="btn" id="startBtn">ابدأ يا Toty</button>
+  </section>
+
+  <section class="card hidden" id="quizCard">
+    <div class="progress" id="progress"></div>
+    <div class="quiz-title" id="question"></div>
+    <div class="options" id="options"></div>
+    <div class="feedback" id="feedback">اختَر إجابتك 👀</div>
+  </section>
+
+  <section class="card confession center hidden" id="confession">
+    <div class="eyebrow">اعتراف صغير</div>
+    <h2>Toty ❤️</h2>
+    <div class="poem">آن الأوان لأعترف
+أن الحياة مملّة.. إلا معك!
+
+وسأعترف..
+يا خلّ قد أنسيتني روحي،
+وكلّي عندما.. شاهدت ملامحك!
+
+آسفي على وقتٍ مضى
+ما كنتُ فيه أعرفك!
+
+ما كنتُ أدري من أنا،
+حتى الحياة جهلتها..
+فعرفتُ نفسي، والحياة،
+وكل شيء عندما..
+أضحت عيوني تبصرك!</div>
+    <div class="final-heart">❤️</div>
+  </section>
+
+  <div class="small center">Made for Toty, لأن البشر حتى الاعترافات صاروا يسوون لها نظام دخول متعدد المراحل.</div>
+</div>
+
+<div class="modal-bg hidden" id="wrongModal">
+  <div class="modal">
+    <div class="emoji">😏</div>
+    <h3>إجابة غلط</h3>
+    <p id="wrongText"></p>
+    <button class="btn" id="retryBtn">حاول مرة ثانية</button>
+  </div>
+</div>
+
+<script>
+const quiz = [
+  {
+    q:'كيف تنقال الكلمة الصح؟ 👀',
+    options:[
+      {t:'تميز', ok:false, c:'هئه'},
+      {t:'تميس', ok:true},
+      {t:'الاثنين صح', ok:false, c:'لا ياشيخ'}
+    ]
+  },
+  {
+    q:'مين تحب أكثر؟ 👀',
+    options:[
+      {t:'أنا', ok:true},
+      {t:'الهلال', ok:false, c:'للاسف خطا'},
+      {t:'جيتور أحمر', ok:false, c:'ماسالتك من متحملك اكثر'}
+    ]
+  },
+  {
+    q:'لما تعصب وترفع صوتك، وش الحقيقة؟ 👀',
+    options:[
+      {t:'صوتي عالي من ربنا', ok:false, c:'لو تحلف على استار الكعبه ماصدقتك'},
+      {t:'أنا واحد حيوان أستاهل كف', ok:true},
+      {t:'إذا عصبت خلّوني بحالي حتى لو قاعد أتهاوش مع لمبة الصالة', ok:false, c:'مو على كيفك يالحبيب'}
+    ]
+  },
+  {
+    q:'إذا قلت لك "براحتك"، وش المفروض تفهم؟ 👀',
+    options:[
+      {t:'أسوي اللي أبيه عادي', ok:false, c:'جرب وشوف وش يصير'},
+      {t:'ألغي اللي براسي وأراضيك فورًا', ok:true},
+      {t:'أنام لين تهدين', ok:false, c:'نام بس لا تقوم'}
+    ]
+  },
+  {
+    q:'إذا زعلنا من بعض، مين المفروض يراضي الثاني؟ 🤍',
+    options:[
+      {t:'أنا أراضيك', ok:false, c:'هئه'},
+      {t:'أنت تراضيني لأنك زعلت مني', ok:true},
+      {t:'كل واحد يروح لحاله لين تهدأ النفوس', ok:false, c:'جرب تسويها'}
+    ]
+  }
+];
+
+let current=0;
+const startBtn=document.getElementById('startBtn');
+const quizCard=document.getElementById('quizCard');
+const progress=document.getElementById('progress');
+const question=document.getElementById('question');
+const options=document.getElementById('options');
+const feedback=document.getElementById('feedback');
+const confession=document.getElementById('confession');
+const wrongModal=document.getElementById('wrongModal');
+const wrongText=document.getElementById('wrongText');
+const retryBtn=document.getElementById('retryBtn');
+
+function render(){
+  const item=quiz[current];
+  progress.textContent=`السؤال ${current+1} من ${quiz.length}`;
+  question.textContent=item.q;
+  options.innerHTML='';
+  feedback.textContent='اختَر إجابتك 👀';
+  item.options.forEach(opt=>{
+    const b=document.createElement('button');
+    b.className='option';
+    b.textContent=opt.t;
+    b.onclick=()=>answer(opt,b);
+    options.appendChild(b);
+  });
+}
+function answer(opt,btn){
+  [...options.children].forEach(x=>x.classList.remove('selected'));
+  btn.classList.add('selected');
+  if(opt.ok){
+    feedback.textContent='صح ✅';
+    setTimeout(()=>{
+      current++;
+      if(current<quiz.length){render();}
+      else finish();
+    },550);
+  }else{
+    wrongText.textContent=opt.c;
+    wrongModal.classList.remove('hidden');
+  }
+}
+function finish(){
+  quizCard.classList.add('hidden');
+  confession.classList.remove('hidden');
+  confession.scrollIntoView({behavior:'smooth',block:'start'});
+  for(let i=0;i<60;i++) setTimeout(confetti,i*45);
+}
+function confetti(){
+  const x=document.createElement('span');
+  x.className='confetti';
+  x.textContent=['❤️','✨','🎉','💕','🎂'][Math.floor(Math.random()*5)];
+  x.style.left=Math.random()*100+'vw';
+  x.style.fontSize=(16+Math.random()*18)+'px';
+  x.style.animationDuration=(3+Math.random()*3)+'s';
+  document.body.appendChild(x);
+  setTimeout(()=>x.remove(),6500);
+}
+startBtn.onclick=()=>{quizCard.classList.remove('hidden');quizCard.scrollIntoView({behavior:'smooth'});render();};
+retryBtn.onclick=()=>wrongModal.classList.add('hidden');
+wrongModal.onclick=e=>{if(e.target===wrongModal)wrongModal.classList.add('hidden')};
+</script>
+</body>
+</html>
